@@ -618,7 +618,7 @@ class BotDialog(ActivityHandler):
 
     def create_hero_card2_home_3(self) -> Attachment:
       herocard1 = HeroCard(
-      images=[CardImage(url="https://media2.fdncms.com/tucsonweekly/imager/u/zoom/6031074/5134c2c0_jesse_-_womens_sdcopy.jpg")],
+      images=[CardImage(url="https://image.shutterstock.com/image-photo/homeless-person-sleep-on-sidewalk-600w-550248562.jpg")],
       buttons=[CardAction(title="homeless", type=ActionTypes.im_back, value="homeless")])
       return CardFactory.hero_card(herocard1)
 
