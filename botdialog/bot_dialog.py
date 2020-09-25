@@ -133,20 +133,23 @@ class BotDialog(ActivityHandler):
         first_clicktime = waterfall_step.values["first_clicktime"]
         second_clicktime = waterfall_step.values["second_clicktime"]
         dif = datetime.strptime(second_clicktime, "%d-%b-%Y (%H:%M:%S.%f)") - datetime.strptime(first_clicktime, "%d-%b-%Y (%H:%M:%S.%f)")
+        current_time = datetime.now().strftime("%d-%b-%Y (%H:%M:%S.%f)")
+        name = waterfall_step.values["username"]
+        user = name + "_" + current_time
 
         # Store into CosmosDB
-        storeitem = await self.cosmodb.read(["user"])
-        if "user" not in storeitem:
+        storeitem = await self.cosmodb.read([user])
+        if user not in storeitem:
             usermode = UserProfile()
         else:
-            usermode = storeitem["user"]
+            usermode = storeitem[user]
         usermode.name = waterfall_step.values["username"] 
         usermode.first = first_click
         usermode.second = second_click
         usermode.firsttime = first_clicktime
         usermode.secondtime = second_clicktime
         usermode.clickdiff = int(dif.total_seconds())
-        collectionStore = {"user" : usermode}
+        collectionStore = {user: usermode}
         await self.cosmodb.write(collectionStore)
 
         if int(dif.total_seconds()) < 10:
@@ -311,7 +314,7 @@ class BotDialog(ActivityHandler):
       herocard2 = HeroCard(
       images=[
                CardImage(
-                  url="https://www.shutterstock.com/image-photo/emotions-television-fan-screaming-hate-rage-1070714912"
+                  url="https://image.shutterstock.com/image-photo/angry-man-driving-vehicle-600w-1039040590.jpg"
                )
       ],
       buttons=[CardAction(title="rage", type=ActionTypes.im_back, value="rage")])
@@ -322,7 +325,7 @@ class BotDialog(ActivityHandler):
       herocard2 = HeroCard(
       images=[
                CardImage(
-                  url="https://www.shutterstock.com/image-photo/stressed-exhausted-woman-sitting-office-desk-1545756836"
+                  url="https://image.shutterstock.com/image-photo/depressed-business-woman-600w-310940801.jpg"
                )
       ],
       buttons=[CardAction(title="overwhelmed", type=ActionTypes.im_back, value="overwhelmed")])
@@ -491,7 +494,7 @@ class BotDialog(ActivityHandler):
 
     def create_hero_card2_family_4(self) -> Attachment:
       herocard1 = HeroCard(
-      images=[CardImage(url="http://psychology.iresearchnet.com/wp-content/uploads/2016/01/Suicide.jpg")],
+      images=[CardImage(url="https://wp-media.patheos.com/blogs/sites/658/2018/02/Ilchi-Lee_I-dont-care_20180220.jpg")],
       buttons=[CardAction(title="dontcare", type=ActionTypes.im_back, value="dontcare")])
       return CardFactory.hero_card(herocard1)
 
@@ -523,7 +526,7 @@ class BotDialog(ActivityHandler):
 
     def create_hero_card2_spouse_4(self) -> Attachment:
       herocard1 = HeroCard(
-      images=[CardImage(url="http://psychology.iresearchnet.com/wp-content/uploads/2016/01/Suicide.jpg")],
+      images=[CardImage(url="https://wp-media.patheos.com/blogs/sites/658/2018/02/Ilchi-Lee_I-dont-care_20180220.jpg")],
       buttons=[CardAction(title="dontcare", type=ActionTypes.im_back, value="dontcare")])
       return CardFactory.hero_card(herocard1)
 
@@ -565,7 +568,7 @@ class BotDialog(ActivityHandler):
 
     def create_hero_card2_self_1(self) -> Attachment:
       herocard1 = HeroCard(
-      images=[CardImage(url="https://image.shutterstock.com/image-photo/divorce-decree-form-ring-600w-570636967.jpg")],
+      images=[CardImage(url="https://www.aconsciousrethink.com/wp-content/uploads/2017/10/self-loathing-702x336.jpg")],
       buttons=[CardAction(title="loathing", type=ActionTypes.im_back, value="loathing")])
       return CardFactory.hero_card(herocard1)
 
@@ -573,7 +576,7 @@ class BotDialog(ActivityHandler):
       herocard2 = HeroCard(
       images=[
                CardImage(
-                  url="https://image.shutterstock.com/image-photo/asian-men-drug-addicts-inject-600w-1170996361.jpg"
+                  url="https://wp-media.patheos.com/blogs/sites/658/2018/02/Ilchi-Lee_I-dont-care_20180220.jpg"
                )
       ],
       buttons=[CardAction(title="dontcare", type=ActionTypes.im_back, value="dontcare")])
@@ -607,7 +610,7 @@ class BotDialog(ActivityHandler):
       herocard2 = HeroCard(
       images=[
                CardImage(
-                  url="https://image.shutterstock.com/image-photo/asian-men-drug-addicts-inject-600w-1170996361.jpg"
+                  url="https://wp-media.patheos.com/blogs/sites/658/2018/02/Ilchi-Lee_I-dont-care_20180220.jpg"
                )
       ],
       buttons=[CardAction(title="dontcare", type=ActionTypes.im_back, value="dontcare")])
